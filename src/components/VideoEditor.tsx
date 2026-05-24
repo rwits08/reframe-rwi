@@ -609,7 +609,7 @@ export default function VideoEditor() {
           </div>
 
           <div className={cn(
-            "space-y-5 transition-opacity duration-300",
+            "space-y-5 transition-opacity duration-300 sticky top-8 self-start",
             (isProcessing || !file) && "pointer-events-none opacity-50"
           )}>
             {!file && (
