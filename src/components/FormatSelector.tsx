@@ -19,13 +19,22 @@ const FORMAT_OPTIONS = [
 export default function FormatSelector({ recipe, onChange }: Props) {
   return (
     <div>
-      <div className="flex items-center gap-1 mb-3">
-        <Film size={10} className="text-film-500 opacity-80" />
-        <div className="text-[10px] font-heading font-semibold uppercase tracking-wider text-[var(--muted)]">
-          Output Format
-        </div>
-      </div>
-      <div className="grid grid-cols-4 gap-2">
+     <div className="flex items-center gap-2 mb-4">
+  <div className="flex items-center justify-center w-6 h-6 rounded-md bg-film-50 border border-film-200">
+    <Film size={12} className="text-film-600" />
+  </div>
+
+  <div>
+    <h3 className="text-sm font-semibold text-[var(--text)]">
+      Output Format
+    </h3>
+
+    <p className="text-xs text-[var(--muted)]">
+      Choose your export file type
+    </p>
+  </div>
+</div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {FORMAT_OPTIONS.map((option) => (
           <button
             key={option.id}
@@ -34,18 +43,19 @@ export default function FormatSelector({ recipe, onChange }: Props) {
             aria-label={`Select ${option.label} format`}
             aria-pressed={recipe.format === option.id}
             className={cn(
-              "relative px-3 py-2.5 rounded-lg border-2 transition-all",
-              "text-xs font-heading font-semibold uppercase tracking-wider",
-              recipe.format === option.id
-                ? "border-film-600 bg-film-50 text-film-600"
-                : "border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] hover:border-film-400 hover:text-film-600"
-            )}
+  "relative px-4 py-3 rounded-xl border transition-all duration-200",
+  "text-sm font-heading font-semibold tracking-wide",
+  "shadow-sm hover:shadow-md hover:-translate-y-0.5",
+  recipe.format === option.id
+    ? "border-film-600 bg-film-50 text-film-700 shadow-md"
+    : "border-[var(--border)] bg-[var(--surface)] text-[var(--text)] hover:border-film-400 hover:bg-film-50/40"
+)}
           >
             {option.label}
           </button>
         ))}
       </div>
-      <p className="text-[10px] text-[var(--muted)] mt-2">
+      <p className="text-sm text-[var(--muted)] mt-3 leading-relaxed">
         {FORMAT_OPTIONS.find((o) => o.id === recipe.format)?.description}
       </p>
     </div>

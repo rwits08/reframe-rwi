@@ -16,18 +16,18 @@ export default function Footer() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <footer className="w-full border-t border-[var(--border)] bg-[var(--bg)] text-[var(--text)] px-6 py-16 mt-20 transition-colors duration-300">
+    <footer className="w-full border-t border-[var(--border)] bg-[var(--surface)] text-[var(--text)] px-6 py-16 mt-20 transition-colors duration-300">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
         {/* Brand Section */}
         <div className="md:col-span-5 space-y-6">
           <div className="space-y-1">
             <h2 className="text-2xl font-bold tracking-tight">Reframe</h2>
-            <p className="text-[9px] font-mono tracking-[0.4em] uppercase opacity-50">
+            <p className="text-xs font-mono tracking-[0.25em] uppercase text-[var(--muted)]">
               Browser Video Studio
             </p>
           </div>
 
-          <p className="text-sm opacity-70 leading-relaxed max-w-sm">
+          <p className="text-sm text-[var(--muted)] leading-relaxed max-w-sm">
             Professional video processing directly in your browser using
             <span className="font-medium opacity-100"> FFmpeg.wasm</span> —
             fast, private, and open source.
@@ -51,7 +51,7 @@ export default function Footer() {
 
         {/* Links Section */}
         <div className="md:col-span-3 space-y-5">
-          <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
             Navigation
           </h3>
           <nav className="flex flex-col gap-3 text-sm">
@@ -59,19 +59,19 @@ export default function Footer() {
               href="https://github.com/magic-peach/reframe"
               target="_blank"
               rel="noopener"
-              className="opacity-70 hover:opacity-100 hover:text-[var(--accent)] hover:scale-110 transition-all duration-500 ease-in-out w-fit flex items-center gap-2 group"
+              className="text-[var(--muted)] hover:text-[var(--accent)] transition-all duration-200 w-fit flex items-center gap-2"
             >
               GitHub
             </a>
             <Link
               href="/contact"
-              className="opacity-70 hover:opacity-100 hover:text-[var(--accent)] hover:scale-110 transition-all duration-500 ease-in-out w-fit flex items-center gap-2 group"
+              className="text-[var(--muted)] hover:text-[var(--accent)] transition-all duration-200 w-fit flex items-center gap-2"
             >
               Contact
             </Link>
             <Link
               href="/privacy"
-              className="opacity-70 hover:opacity-100 hover:text-[var(--accent)] hover:scale-110 transition-all duration-500 ease-in-out w-fit flex items-center gap-2 group"
+              className="text-[var(--muted)] hover:text-[var(--accent)] transition-all duration-200 w-fit flex items-center gap-2"
             >
               Privacy Policy
             </Link>
@@ -82,7 +82,7 @@ export default function Footer() {
         <div className="md:col-span-4 flex flex-col items-start md:items-end space-y-8">
           {/* Newsletter - Logic updated to pass Lint/Build checks */}
           <div className="w-full flex flex-col items-start md:items-end gap-3">
-            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
               Updates
             </h3>
 
@@ -93,7 +93,7 @@ export default function Footer() {
                 aria-label="Open updates signup form"
                 aria-expanded={isExpanded}
                 aria-controls="updates-signup-form"
-                className="w-40 px-3 flex items-center justify-center bg-[var(--surface)] border border-[var(--border)] rounded-lg py-3 hover:bg-[var(--border)] transition-all duration-500 ease-in-out group"
+                className="w-40 px-3 flex items-center justify-center bg-[var(--bg)] border border-[var(--border)] rounded-xl py-3 hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] transition-all duration-200 shadow-sm hover:shadow-md group"
               >
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-60 group-hover:opacity-100 transition-opacity">
                   Stay Tuned
@@ -134,7 +134,7 @@ export default function Footer() {
           {/* Community Section */}
           {/* Community Section */}
           <div className="flex flex-col items-start md:items-end gap-3">
-            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
               Community
             </h3>
 
@@ -143,7 +143,7 @@ export default function Footer() {
                 href="https://github.com/magic-peach/reframe"
                 target="_blank"
                 rel="noopener"
-                className="p-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center group"
+                className="p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg)] hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] transition-all duration-200 hover:-translate-y-0.5 shadow-sm hover:shadow-md active:scale-95 flex items-center justify-center group"
                 aria-label="Open Reframe GitHub repository"
               >
                 <Github
@@ -157,7 +157,7 @@ export default function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener"
-                className="p-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center group"
+                className="p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg)] hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] transition-all duration-200 hover:-translate-y-0.5 shadow-sm hover:shadow-md active:scale-95 flex items-center justify-center group"
                 aria-label="Open Twitter"
               >
                 <TwitterIcon
@@ -171,7 +171,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener"
-                className="p-2.5 rounded-lg border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center group"
+                className="p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg)] hover:border-[var(--accent)] hover:bg-[var(--accent-muted)] transition-all duration-200 hover:-translate-y-0.5 shadow-sm hover:shadow-md active:scale-95 flex items-center justify-center group"
                 aria-label="Open Instagram"
               >
                 <Instagram
@@ -186,7 +186,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] font-bold uppercase tracking-[0.3em] opacity-40">
+      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-[var(--border)] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
         <p>© {new Date().getFullYear()} Reframe · MIT License</p>
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_8px_var(--accent)]" />

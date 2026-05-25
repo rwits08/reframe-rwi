@@ -116,14 +116,98 @@ export default function FileUpload({
 
     onFileSelect(file);
   }, [onFileSelect]);
+// ── Drop zone (inner) handler ─────────────────────────
+const handleDrop = (e: React.DragEvent) => {
+  e.preventDefault();
+  setDragging(false);
 
-  // ── Drop zone (inner) handler ─────────────────────────
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setDragging(false);
-    const file = e.dataTransfer.files?.[0];
-    if (file) handleFile(file);
-  };
+  const file = e.dataTransfer.files?.[0];
+
+  if (file) {
+    handleFile(file);
+  }
+};
+ // ── Drop zone (inner) ─────────────────────────────────
+const DropZone = () => (
+  <div
+    id="upload-zone"
+    role="button"
+    tabIndex={0}
+    aria-label="Video upload area. Drag and drop a video file or press Enter to browse."
+    onDragOver={(e) => {
+      e.preventDefault();
+      setDragging(true);
+    }}
+    onDragLeave={() => setDragging(false)}
+    onDrop={handleDrop}
+    onClick={() => inputRef.current?.click()}
+    onKeyDown={(e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        inputRef.current?.click();
+      }
+    }}
+    className={cn(
+      "group flex flex-col items-center justify-center gap-5 py-14 px-6",
+      "border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300 relative overflow-hidden",
+      dragging
+        ? "border-[var(--accent)] bg-[var(--accent-muted)] scale-[1.02] shadow-[var(--shadow)] ring-4 ring-[var(--accent-muted)]"
+        : "border-[var(--border)] bg-[var(--surface)] hover:border-film-400 hover:bg-film-50/40 shadow-sm"
+    )}
+  >
+    {dragging && (
+      <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-film-500/20 to-transparent pointer-events-none" />
+    )}
+
+    {/* Upload Animation */}
+    <div className="w-20 h-20 opacity-100 group-hover:scale-110 transition-all duration-200">
+      <LottiePlayer animationData={uploadAnim} loop autoplay />
+    </div>
+
+    {/* Main Text */}
+    <div className="text-center">
+      <p className="font-heading font-semibold text-[var(--text)] text-lg">
+        {dragging ? "Release to upload" : "Drag & Drop your video here"}
+      </p>
+
+      <p className="text-sm text-[var(--muted)] mt-2 font-medium">
+        or click to browse
+      </p>
+
+      <p className="text-sm text-[var(--muted)] mt-2 font-heading">
+        Ctrl+O / Cmd+O
+      </p>
+    </div>
+
+    {/* File Types */}
+    <div className="flex items-center gap-2 px-4 py-2.5 bg-[var(--bg)] border border-[var(--border)] rounded-lg text-sm font-heading font-medium text-[var(--text)] shadow-sm">
+      <FolderOpen size={15} />
+      MP4 / MOV / AVI / WebM
+    </div>
+
+    {/* Support Text */}
+    <p className="text-sm text-[var(--muted)] text-center max-w-md leading-relaxed">
+      Supports MP4, MOV, AVI, MKV, WebM, and most video formats up to 2GB
+    </p>
+
+    {/* Error */}
+    {fileError && (
+      <p className="text-sm text-[var(--error)] text-center font-medium">
+        {fileError}
+      </p>
+    )}
+
+    <input
+      ref={inputRef}
+      type="file"
+      accept="video/*"
+      className="hidden"
+      onChange={(e) => {
+        const f = e.target.files?.[0];
+        if (f) handleFile(f);
+      }}
+    />
+  </div>
+);
 
   // ── File info (shown after upload) ───────────────────
   const FileInfo = () => (
@@ -190,75 +274,8 @@ export default function FileUpload({
   );
 
   // ── Drop zone (inner) ─────────────────────────────────
-  const DropZone = () => (
-    <div
-      id="upload-zone"
-      role="button"
-      tabIndex={0}
-      aria-label="Video upload area. Drag and drop a video file or press Enter to browse."
-      onDragOver={(e) => {
-        e.preventDefault();
-        setDragging(true);
-      }}
-      onDragLeave={() => setDragging(false)}
-      onDrop={handleDrop}
-      onClick={() => inputRef.current?.click()}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          inputRef.current?.click();
-        }
-      }}
-      className={cn(
-        "group flex flex-col items-center justify-center gap-4 py-12 px-6",
-        "border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300 relative overflow-hidden",
-        dragging
-          ? "border-[var(--accent)] bg-[var(--accent-muted)] scale-[1.02] shadow-[var(--shadow)] ring-4 ring-[var(--accent-muted)]"
-          : "border-[var(--border)] bg-[var(--bg)] hover:border-film-400 hover:bg-film-50/40"
-      )}
-    >
-      {dragging && (
-        <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-film-500/20 to-transparent pointer-events-none" />
-      )}
 
-      <div className="w-20 h-20 opacity-80 group-hover:opacity-100 transition-opacity group-hover:scale-110 duration-200">
-        <LottiePlayer animationData={uploadAnim} loop autoplay />
-      </div>
-
-      <div className="text-center">
-        <p className="font-heading font-semibold text-[var(--text)] text-base">
-          {dragging ? "Release to upload" : "Drag & Drop your video here"}
-        </p>
-        <p className="text-sm text-[var(--muted)] mt-1">or click to browse</p>
-        <p className="text-xs text-[var(--muted)] mt-2 font-heading">
-          Ctrl+O / Cmd+O
-        </p>
-      </div>
-
-      <div className="flex items-center gap-2 px-4 py-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg text-sm font-heading font-medium text-[var(--muted)]">
-        <FolderOpen size={14} />
-        MP4 / MOV / AVI / WebM
-      </div>
-
-      <p className="text-xs text-[var(--muted)] text-center">
-        Supports: MP4, MOV, AVI, MKV, WebM, and most video formats up to 2GB
-      </p>
-
-      {fileError && (
-        <p className="text-sm text-[var(--error)] text-center">{fileError}</p>
-      )}
-
-      <input
-        ref={inputRef}
-        type="file"
-        accept="video/*"
-        className="hidden"
-        onChange={(e) => {
-          const f = e.target.files?.[0];
-          if (f) handleFile(f);
-        }}
-      />
-    </div>
-  );
+      
 
   return (
     <>

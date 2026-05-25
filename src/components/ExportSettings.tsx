@@ -44,13 +44,13 @@ export default function ExportSettings({
 
   return (
     <>
-      <div>
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-5 shadow-sm">
         <div className="flex items-center justify-between mb-2">
           <label
             htmlFor="quality-control"
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-[var(--muted)] flex items-center gap-2"
+            className="text-sm font-heading font-semibold text-[var(--text)] flex items-center gap-2"
           >
-            <SlidersHorizontal size={10} />
+            <SlidersHorizontal size={14} className="text-film-600" />
             Quality
 
             <span
@@ -92,7 +92,7 @@ export default function ExportSettings({
 
         <div
           id="quality-description"
-          className="mt-1 space-y-3"
+          className="mt-3 space-y-4"
         >
           <div className="flex justify-between">
             <span className="text-sm text-[var(--muted)]">
@@ -104,7 +104,7 @@ export default function ExportSettings({
             </span>
           </div>
 
-          <p className="text-xs text-[var(--muted)]">
+          <p className="text-sm text-[var(--muted)] leading-relaxed">
             Estimated size:{" "}
             <span className="font-semibold text-[var(--text)]">
               {estimatedSize}
@@ -141,13 +141,13 @@ export default function ExportSettings({
         )}
       </div>
 
-      <div>
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-4 shadow-sm space-y-2">
         <div className="flex items-center justify-between mb-1">
           <label
             htmlFor="stabilization-toggle"
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-[var(--muted)] flex items-center gap-2"
+            className="text-sm font-heading font-semibold text-[var(--text)] flex items-center gap-2"
           >
-            <SlidersHorizontal size={10} />
+            <SlidersHorizontal size={14} className="text-film-600" />
             Stabilization
           </label>
 
@@ -162,19 +162,19 @@ export default function ExportSettings({
                 })
               }
               aria-label="Enable video stabilization"
-              className="w-full accent-film-600 cursor-pointer"
+              className="w-4 h-4 accent-film-600 cursor-pointer"
             />
           </span>
         </div>
 
-        <p className="text-xs text-[var(--muted)] mb-1">
+        <p className="text-sm text-[var(--muted)] leading-relaxed">
           Reduce camera shake
         </p>
 
         <div className="flex justify-end">
           <span
             className={cn(
-              "text-xs",
+              "text-sm",
               recipe.stabilization
                 ? "text-[var(--error)] font-medium"
                 : "text-[var(--muted)]"
@@ -184,13 +184,13 @@ export default function ExportSettings({
           </span>
         </div>
       </div>
-      <div>
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-4 shadow-sm space-y-2">
         <div className="flex items-center justify-between mb-1">
           <label
             htmlFor="denoise-toggle"
-            className="text-sm font-heading font-semibold uppercase tracking-wider text-[var(--muted)] flex items-center gap-2"
+            className="text-sm font-heading font-semibold text-[var(--text)] flex items-center gap-2"
           >
-            <SlidersHorizontal size={10} />
+            <SlidersHorizontal size={14} className="text-film-600" />
             Reduce noise
 
             <span
@@ -213,19 +213,19 @@ export default function ExportSettings({
               }
               aria-label="Enable noise reduction"
               aria-checked={recipe.denoise}
-              className="w-full accent-film-600 cursor-pointer"
+              className="w-4 h-4 accent-film-600 cursor-pointer"
             />
           </span>
         </div>
 
-        <p className="text-xs text-[var(--muted)] mb-1">
+        <p className="text-sm text-[var(--muted)] leading-relaxed">
           Reduce low-light video grain
         </p>
 
         <div className="flex justify-end">
           <span
             className={cn(
-              "text-xs",
+              "text-sm",
               recipe.denoise
                 ? "text-red-700 font-medium"
                 : "text-[var(--muted)]"
